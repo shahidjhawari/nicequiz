@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Pakistan Quiz</Text>
+      <Text style={styles.title}>Welcome to Nice Quiz</Text>
       <TouchableOpacity
         style={styles.startButton}
         onPress={() => navigation.navigate('Dashboard')}

@@ -3,16 +3,55 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const questions = [
   {
-    question: 'What is the capital of Pakistan?',
-    options: ['Karachi', 'Islamabad', 'Lahore', 'Peshawar'],
-    correctAnswer: 'Islamabad',
+    question: 'Who was the first Prime Minister of Pakistan?',
+    options: ['Liaquat Ali Khan', 'Benazir Bhutto', 'Zulfiqar Ali Bhutto', 'Imran Khan'],
+    correctAnswer: 'Liaquat Ali Khan',
   },
   {
-    question: 'Who is the founder of Pakistan?',
-    options: ['Allama Iqbal', 'Liaquat Ali Khan', 'Muhammad Ali Jinnah', 'Zulfiqar Ali Bhutto'],
-    correctAnswer: 'Muhammad Ali Jinnah',
+    question: 'What is the national anthem of Pakistan called?',
+    options: ['Pak Sarzameen', 'Qaumi Taranah', 'Jeevay Jeevay Pakistan', 'Sohni Dharti'],
+    correctAnswer: 'Qaumi Taranah',
   },
-  // Add more questions here...
+  {
+    question: 'Which city is known as the "Heart of Pakistan"?',
+    options: ['Islamabad', 'Lahore', 'Karachi', 'Rawalpindi'],
+    correctAnswer: 'Lahore',
+  },
+  {
+    question: 'Which Pakistani scientist is known as the father of Pakistan’s nuclear program?',
+    options: ['Abdul Qadeer Khan', 'Abdus Salam', 'Ishfaq Ahmad', 'Raziuddin Siddiqui'],
+    correctAnswer: 'Abdul Qadeer Khan',
+  },
+  {
+    question: 'Which is the national animal of Pakistan?',
+    options: ['Lion', 'Markhor', 'Tiger', 'Elephant'],
+    correctAnswer: 'Markhor',
+  },
+  {
+    question: 'What is the highest civilian award in Pakistan?',
+    options: ['Nishan-e-Haider', 'Tamgha-e-Imtiaz', 'Sitara-e-Jurat', 'Hilal-e-Pakistan'],
+    correctAnswer: 'Nishan-e-Haider',
+  },
+  {
+    question: 'Which desert is located in the southern part of Pakistan?',
+    options: ['Sahara', 'Thar', 'Gobi', 'Kalahari'],
+    correctAnswer: 'Thar',
+  },
+  {
+    question: 'Who wrote the national anthem of Pakistan?',
+    options: ['Allama Iqbal', 'Faiz Ahmed Faiz', 'Hafeez Jalandhari', 'Josh Malihabadi'],
+    correctAnswer: 'Hafeez Jalandhari',
+  },
+  {
+    question: 'Which city is known as the "Manchester of Pakistan"?',
+    options: ['Sialkot', 'Faisalabad', 'Multan', 'Gujranwala'],
+    correctAnswer: 'Faisalabad',
+  },
+  {
+    question: 'Which Pakistani lake is known as the second largest saltwater lake in the world?',
+    options: ['Manchar Lake', 'Saif-ul-Malook', 'Haleji Lake', 'Keenjhar Lake'],
+    correctAnswer: 'Manchar Lake',
+  },
 ];
 
 export default function Quiz() {

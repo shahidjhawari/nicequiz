@@ -1,58 +1,101 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, ScrollView } from 'react-native';
 
 export default function DashboardScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.quizButton}
-        onPress={() => navigation.navigate('Quiz')}
-      >
-        <Text style={styles.quizButtonText}>Pakistan Quiz</Text>
-      </TouchableOpacity>
-      <View style={styles.sideButtonsContainer}>
-        <TouchableOpacity style={styles.sideButton}>
-          <Text style={styles.sideButtonText}>Left Button</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.sectionTitle}>Pakistan Quizzes</Text>
+      <View style={styles.quizSection}>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz', { quizType: 'Pakistan Quiz 1' })}
+        >
+          <Text style={styles.quizButtonText}>Pakistan Quiz 1</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.sideButton}>
-          <Text style={styles.sideButtonText}>Right Button</Text>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz2', { quizType: 'Pakistan Quiz 2' })}
+        >
+          <Text style={styles.quizButtonText}>Pakistan Quiz 2</Text>
         </TouchableOpacity>
       </View>
-    </View>
+
+      <Text style={styles.sectionTitle}>World Quizzes</Text>
+      <View style={styles.quizSection}>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz', { quizType: 'World Quiz 1' })}
+        >
+          <Text style={styles.quizButtonText}>World Quiz 1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz', { quizType: 'World Quiz 2' })}
+        >
+          <Text style={styles.quizButtonText}>World Quiz 2</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.sectionTitle}>Islam Quizzes</Text>
+      <View style={styles.quizSection}>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz', { quizType: 'Islam Quiz 1' })}
+        >
+          <Text style={styles.quizButtonText}>Islam Quiz 1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz', { quizType: 'Islam Quiz 2' })}
+        >
+          <Text style={styles.quizButtonText}>Islam Quiz 2</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.sectionTitle}>General Knowledge Quizzes</Text>
+      <View style={styles.quizSection}>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz', { quizType: 'General Knowledge Quiz 1' })}
+        >
+          <Text style={styles.quizButtonText}>General Knowledge Quiz 1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.quizButton}
+          onPress={() => navigation.navigate('Quiz', { quizType: 'General Knowledge Quiz 2' })}
+        >
+          <Text style={styles.quizButtonText}>General Knowledge Quiz 2</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
+    alignItems: 'center',
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  quizSection: {
+    marginBottom: 30,
+    width: '100%',
   },
   quizButton: {
     backgroundColor: '#4CAF50',
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 5,
-    marginBottom: 30,
+    marginBottom: 10,
+    alignItems: 'center',
   },
   quizButtonText: {
     color: '#fff',
-    fontSize: 20,
-  },
-  sideButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-  },
-  sideButton: {
-    backgroundColor: '#008CBA',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  sideButtonText: {
-    color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
   },
 });

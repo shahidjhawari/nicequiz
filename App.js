@@ -6,6 +6,7 @@ import DashboardScreen from './src/screens/DashboardScreen';
 import Quiz from './src/screens/Quiz';
 import Quiz2 from './src/screens/Quiz2';
 import WorldQuiz1 from './src/screens/WorldQuiz1';
+import WorldQuiz2 from './src/screens/WorldQuiz2.js';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Quiz" component={Quiz} />
         <Stack.Screen name="Quiz2" component={Quiz2} />
         <Stack.Screen name="WorldQuiz1" component={WorldQuiz1} />
+        <Stack.Screen name="WorldQuiz2" component={WorldQuiz2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

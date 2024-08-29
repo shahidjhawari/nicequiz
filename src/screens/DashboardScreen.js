@@ -24,7 +24,7 @@ export default function DashboardScreen({ navigation }) {
       <View style={styles.quizSection}>
         <TouchableOpacity
           style={styles.quizButton}
-          onPress={() => navigation.navigate('Quiz', { quizType: 'World Quiz 1' })}
+          onPress={() => navigation.navigate('WorldQuiz1', { quizType: 'World Quiz 1' })}
         >
           <Text style={styles.quizButtonText}>World Quiz 1</Text>
         </TouchableOpacity>

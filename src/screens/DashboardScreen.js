@@ -36,19 +36,19 @@ export default function DashboardScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.sectionTitle}>Islam Quizzes</Text>
+      <Text style={styles.sectionTitle}>Science Quizzes</Text>
       <View style={styles.quizSection}>
         <TouchableOpacity
           style={styles.quizButton}
-          onPress={() => navigation.navigate('Quiz', { quizType: 'Islam Quiz 1' })}
+          onPress={() => navigation.navigate('ScienceQuiz1', { quizType: 'Islam Quiz 1' })}
         >
-          <Text style={styles.quizButtonText}>Islam Quiz 1</Text>
+          <Text style={styles.quizButtonText}>Science Quiz 1</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.quizButton}
-          onPress={() => navigation.navigate('Quiz', { quizType: 'Islam Quiz 2' })}
+          onPress={() => navigation.navigate('ScienceQuiz2', { quizType: 'Islam Quiz 2' })}
         >
-          <Text style={styles.quizButtonText}>Islam Quiz 2</Text>
+          <Text style={styles.quizButtonText}>Science Quiz 2</Text>
         </TouchableOpacity>
       </View>
 

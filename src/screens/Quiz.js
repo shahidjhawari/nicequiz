@@ -1,118 +1,145 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const questions = [
-  {
-    question: 'Who was the first Prime Minister of Pakistan?',
-    options: ['Liaquat Ali Khan', 'Benazir Bhutto', 'Zulfiqar Ali Bhutto', 'Imran Khan'],
-    correctAnswer: 'Liaquat Ali Khan',
-  },
-  {
-    question: 'What is the national anthem of Pakistan called?',
-    options: ['Pak Sarzameen', 'Qaumi Taranah', 'Jeevay Jeevay Pakistan', 'Sohni Dharti'],
-    correctAnswer: 'Qaumi Taranah',
-  },
-  {
-    question: 'Which city is known as the "Heart of Pakistan"?',
-    options: ['Islamabad', 'Lahore', 'Karachi', 'Rawalpindi'],
-    correctAnswer: 'Lahore',
-  },
-  {
-    question: 'Which Pakistani scientist is known as the father of Pakistan’s nuclear program?',
-    options: ['Abdul Qadeer Khan', 'Abdus Salam', 'Ishfaq Ahmad', 'Raziuddin Siddiqui'],
-    correctAnswer: 'Abdul Qadeer Khan',
-  },
-  {
-    question: 'Which is the national animal of Pakistan?',
-    options: ['Lion', 'Markhor', 'Tiger', 'Elephant'],
-    correctAnswer: 'Markhor',
-  },
-  {
-    question: 'What is the highest civilian award in Pakistan?',
-    options: ['Nishan-e-Haider', 'Tamgha-e-Imtiaz', 'Sitara-e-Jurat', 'Hilal-e-Pakistan'],
-    correctAnswer: 'Nishan-e-Haider',
-  },
-  {
-    question: 'Which desert is located in the southern part of Pakistan?',
-    options: ['Sahara', 'Thar', 'Gobi', 'Kalahari'],
-    correctAnswer: 'Thar',
-  },
-  {
-    question: 'Who wrote the national anthem of Pakistan?',
-    options: ['Allama Iqbal', 'Faiz Ahmed Faiz', 'Hafeez Jalandhari', 'Josh Malihabadi'],
-    correctAnswer: 'Hafeez Jalandhari',
-  },
-  {
-    question: 'Which city is known as the "Manchester of Pakistan"?',
-    options: ['Sialkot', 'Faisalabad', 'Multan', 'Gujranwala'],
-    correctAnswer: 'Faisalabad',
-  },
-  {
-    question: 'Which Pakistani lake is known as the second largest saltwater lake in the world?',
-    options: ['Manchar Lake', 'Saif-ul-Malook', 'Haleji Lake', 'Keenjhar Lake'],
-    correctAnswer: 'Manchar Lake',
-  },
-];
-
-export default function Quiz() {
+export default function Quiz2({navigation}) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
+  const [isQuizFinished, setIsQuizFinished] = useState(false);
+
+  const questions = [
+    {
+      question: 'What is the official name of Pakistan?',
+      options: [
+        'Islamic Republic of Pakistan',
+        'Democratic Republic of Pakistan',
+        'Republic of Pakistan',
+        'Federal Republic of Pakistan',
+      ],
+      correctAnswer: 'Islamic Republic of Pakistan',
+    },
+    {
+      question: 'Which mountain range is located in northern Pakistan?',
+      options: ['Himalayas', 'Alps', 'Rockies', 'Andes'],
+      correctAnswer: 'Himalayas',
+    },
+    {
+      question: 'What is the currency used in Pakistan?',
+      options: ['Rupee', 'Dollar', 'Yen', 'Euro'],
+      correctAnswer: 'Rupee',
+    },
+    {
+      question:
+        'Which famous Pakistani scientist won the Nobel Prize in Physics?',
+      options: ['Abdul Salam', 'A.Q. Khan', 'Dr. Ishfaq Ahmad', 'Hadi Sohaib'],
+      correctAnswer: 'Abdul Salam',
+    },
+    {
+      question: 'What is the name of Pakistan’s national airline?',
+      options: [
+        'Pakistan International Airlines',
+        'Air Pakistan',
+        'National Airlines',
+        'Pak Air',
+      ],
+      correctAnswer: 'Pakistan International Airlines',
+    },
+    {
+      question: 'Which Pakistani city is known as the “City of Gardens”?',
+      options: ['Lahore', 'Karachi', 'Rawalpindi', 'Faisalabad'],
+      correctAnswer: 'Lahore',
+    },
+    {
+      question:
+        'Which famous Pakistani cricketer is known as the “King of Swing”?',
+      options: ['Wasim Akram', 'Imran Khan', 'Javed Miandad', 'Shahid Afridi'],
+      correctAnswer: 'Wasim Akram',
+    },
+    {
+      question: 'What is the name of the largest dam in Pakistan?',
+      options: ['Tarbela Dam', 'Mangla Dam', 'Warsak Dam', 'Chashma Dam'],
+      correctAnswer: 'Tarbela Dam',
+    },
+    {
+      question: 'Which historical site is located in the city of Mohenjo-Daro?',
+      options: [
+        'Indus Valley Civilization',
+        'Greek Ruins',
+        'Roman Bath',
+        'Egyptian Pyramids',
+      ],
+      correctAnswer: 'Indus Valley Civilization',
+    },
+    {
+      question:
+        'What is the name of the famous Pakistani festival celebrated with fireworks and traditional foods?',
+      options: ['Eid ul-Fitr', 'Diwali', 'Christmas', 'Holi'],
+      correctAnswer: 'Eid ul-Fitr',
+    },
+  ];
 
   const currentQuestion = questions[currentQuestionIndex];
 
-  const handleOptionPress = (option) => {
+  const handleOptionPress = option => {
     setSelectedOption(option);
     if (option === currentQuestion.correctAnswer) {
-      setIsCorrect(true);
       setScore(score + 1);
+    }
+
+    if (currentQuestionIndex + 1 < questions.length) {
+      setTimeout(() => {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setSelectedOption(null);
+      }, 1000); // Delay to show the selected answer before moving to the next question
     } else {
-      setIsCorrect(false);
+      setIsQuizFinished(true);
     }
   };
 
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex + 1 < questions.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedOption(null);
-      setIsCorrect(null);
-    } else {
-      alert(`Quiz Over! Your Score: ${score}/${questions.length}`);
-      // Reset the quiz
-      setCurrentQuestionIndex(0);
-      setSelectedOption(null);
-      setIsCorrect(null);
-      setScore(0);
-    }
+  const handleRestartQuiz = () => {
+    setCurrentQuestionIndex(0);
+    setSelectedOption(null);
+    setScore(0);
+    setIsQuizFinished(false);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{currentQuestion.question}</Text>
-      {currentQuestion.options.map((option, index) => (
-        <TouchableOpacity
-          key={index}
-          style={[
-            styles.optionButton,
-            selectedOption === option && isCorrect === true
-              ? styles.correctOption
-              : selectedOption === option && isCorrect === false
-              ? styles.incorrectOption
-              : null,
-          ]}
-          onPress={() => handleOptionPress(option)}
-          disabled={selectedOption !== null} // Disable other options once one is selected
-        >
-          <Text style={styles.optionText}>{option}</Text>
-        </TouchableOpacity>
-      ))}
-      {selectedOption && (
-        <TouchableOpacity style={styles.nextButton} onPress={handleNextQuestion}>
-          <Text style={styles.nextButtonText}>
-            {currentQuestionIndex + 1 < questions.length ? 'Next Question' : 'Finish Quiz'}
+      {isQuizFinished ? (
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultText}>Quiz Finished!</Text>
+          <Text style={styles.resultText}>Correct Answers: {score}</Text>
+          <Text style={styles.resultText}>
+            Incorrect Answers: {questions.length - score}
           </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.restartButton}
+            onPress={handleRestartQuiz}>
+            <Text style={styles.restartButtonText}>Restart Quiz</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <>
+          <Text style={styles.question}>{currentQuestion.question}</Text>
+          {currentQuestion.options.map((option, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.optionButton,
+                selectedOption === option &&
+                option === currentQuestion.correctAnswer
+                  ? styles.correctOption
+                  : selectedOption === option &&
+                    option !== currentQuestion.correctAnswer
+                  ? styles.incorrectOption
+                  : null,
+              ]}
+              onPress={() => handleOptionPress(option)}
+              disabled={selectedOption !== null}>
+              <Text style={styles.optionText}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+        </>
       )}
     </View>
   );
@@ -149,14 +176,23 @@ const styles = StyleSheet.create({
   incorrectOption: {
     backgroundColor: 'red',
   },
-  nextButton: {
+  resultContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  resultText: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  restartButton: {
     backgroundColor: '#4CAF50',
     paddingVertical: 15,
     paddingHorizontal: 30,
     marginTop: 20,
     borderRadius: 5,
   },
-  nextButtonText: {
+  restartButtonText: {
     color: '#fff',
     fontSize: 18,
   },

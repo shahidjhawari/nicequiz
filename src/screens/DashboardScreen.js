@@ -56,13 +56,13 @@ export default function DashboardScreen({ navigation }) {
       <View style={styles.quizSection}>
         <TouchableOpacity
           style={styles.quizButton}
-          onPress={() => navigation.navigate('Quiz', { quizType: 'General Knowledge Quiz 1' })}
+          onPress={() => navigation.navigate('GKQuiz1', { quizType: 'General Knowledge Quiz 1' })}
         >
           <Text style={styles.quizButtonText}>General Knowledge Quiz 1</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.quizButton}
-          onPress={() => navigation.navigate('Quiz', { quizType: 'General Knowledge Quiz 2' })}
+          onPress={() => navigation.navigate('GKQuiz2', { quizType: 'General Knowledge Quiz 2' })}
         >
           <Text style={styles.quizButtonText}>General Knowledge Quiz 2</Text>
         </TouchableOpacity>

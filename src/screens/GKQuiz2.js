@@ -1,11 +1,24 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Button} from 'react-native';
+import {
+  InterstitialAd,
+  AdEventType,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+
+const adUnitId = __DEV__
+  ? TestIds.INTERSTITIAL
+  : 'ca-app-pub-1948175280014202~2536411532';
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  keywords: ['fashion', 'clothing'],
+});
 
 export default function Quiz2({navigation}) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
+  const [adLoaded, setAdLoaded] = useState(false);
 
   const questions = [
     {
@@ -15,12 +28,22 @@ export default function Quiz2({navigation}) {
     },
     {
       question: 'Which ocean is the largest?',
-      options: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
+      options: [
+        'Atlantic Ocean',
+        'Indian Ocean',
+        'Arctic Ocean',
+        'Pacific Ocean',
+      ],
       correctAnswer: 'Pacific Ocean',
     },
     {
       question: 'Who painted the Mona Lisa?',
-      options: ['Vincent van Gogh', 'Leonardo da Vinci', 'Pablo Picasso', 'Claude Monet'],
+      options: [
+        'Vincent van Gogh',
+        'Leonardo da Vinci',
+        'Pablo Picasso',
+        'Claude Monet',
+      ],
       correctAnswer: 'Leonardo da Vinci',
     },
     {
@@ -40,7 +63,12 @@ export default function Quiz2({navigation}) {
     },
     {
       question: 'Who is the author of "Harry Potter"?',
-      options: ['J.K. Rowling', 'J.R.R. Tolkien', 'George R.R. Martin', 'C.S. Lewis'],
+      options: [
+        'J.K. Rowling',
+        'J.R.R. Tolkien',
+        'George R.R. Martin',
+        'C.S. Lewis',
+      ],
       correctAnswer: 'J.K. Rowling',
     },
     {
@@ -58,8 +86,22 @@ export default function Quiz2({navigation}) {
       options: ['Monaco', 'San Marino', 'Vatican City', 'Liechtenstein'],
       correctAnswer: 'Vatican City',
     },
-  ];    
-  
+  ];
+
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        setAdLoaded(true);
+      },
+    );
+
+    interstitial.load();
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -73,9 +115,14 @@ export default function Quiz2({navigation}) {
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setSelectedOption(null);
-      }, 1000); // Delay to show the selected answer before moving to the next question
+      }, 1000);
     } else {
       setIsQuizFinished(true);
+
+      // Show the interstitial ad if loaded
+      if (adLoaded) {
+        interstitial.show();
+      }
     }
   };
 
@@ -84,6 +131,7 @@ export default function Quiz2({navigation}) {
     setSelectedOption(null);
     setScore(0);
     setIsQuizFinished(false);
+    interstitial.load(); // Reload the ad for the next quiz attempt
   };
 
   return (

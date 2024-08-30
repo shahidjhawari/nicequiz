@@ -826,7 +826,7 @@
 "@babel/regjsgen@^0.8.0":
   version "0.8.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.20.0", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.20.0", "@babel/runtime@^7.8.4":
   version "7.25.4"
   dependencies:
     regenerator-runtime "^0.14.0"
@@ -910,6 +910,11 @@
 
 "@humanwhocodes/object-schema@^2.0.2":
   version "2.0.3"
+
+"@iabtcf/core@^1.5.3":
+  version "1.5.6"
+  resolved "https://registry.npmjs.org/@iabtcf/core/-/core-1.5.6.tgz"
+  integrity sha512-u2q9thI9vLurYZdGtyJsDYOqoeLc4EgQsYGSc+UVibYII61B/ENJPZS6eFlML1F0hSoTR/goptpo5nGRDkKd2w==
 
 "@isaacs/ttlcache@^1.4.1":
   version "1.4.1"
@@ -2353,6 +2358,11 @@ denodeify@^1.2.1:
 
 depd@2.0.0:
   version "2.0.0"
+
+dequal@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz"
+  integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
 
 destroy@1.2.0:
   version "1.2.0"
@@ -4374,6 +4384,14 @@ react-native-gesture-handler@^2.18.1, "react-native-gesture-handler@>= 1.0.0":
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-google-mobile-ads@^14.2.3:
+  version "14.2.3"
+  resolved "https://registry.npmjs.org/react-native-google-mobile-ads/-/react-native-google-mobile-ads-14.2.3.tgz"
+  integrity sha512-sPrjUlX1yLCWvf4klma9IgVLrvBrqTk4aib/04Zdf6qYv6T7qqxR1Kaewv6YrooQZ5/NrN3bQLyKpZDkph4H+A==
+  dependencies:
+    "@iabtcf/core" "^1.5.3"
+    use-deep-compare-effect "^1.8.1"
+
 react-native-reanimated@^3.15.1:
   version "3.15.1"
   resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.15.1.tgz"
@@ -4462,7 +4480,7 @@ react-test-renderer@18.3.1:
     react-shallow-renderer "^16.15.0"
     scheduler "^0.23.2"
 
-react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^18.2.0, react@^18.3.1, react@>=16.8, react@>=17.0.0, react@18.3.1:
+react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^18.2.0, react@^18.3.1, react@>=16.13, react@>=16.8, react@>=17.0.0, react@18.3.1:
   version "18.3.1"
   dependencies:
     loose-envify "^1.1.0"
@@ -5087,6 +5105,14 @@ uri-js@^4.2.2:
   version "4.4.1"
   dependencies:
     punycode "^2.1.0"
+
+use-deep-compare-effect@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.npmjs.org/use-deep-compare-effect/-/use-deep-compare-effect-1.8.1.tgz"
+  integrity sha512-kbeNVZ9Zkc0RFGpfMN3MNfaKNvcLNyxOAAd9O4CBZ+kCBXXscn9s/4I+8ytUER4RDpEYs5+O6Rs4PqiZ+rHr5Q==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    dequal "^2.0.2"
 
 use-latest-callback@^0.2.1:
   version "0.2.1"

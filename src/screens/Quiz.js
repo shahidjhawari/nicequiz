@@ -1,11 +1,18 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { InterstitialAd, AdEventType, TestIds } from 'react-native-google-mobile-ads';
 
-export default function Quiz2({navigation}) {
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-1948175280014202~2536411532';
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  keywords: ['fashion', 'clothing'],
+});
+
+export default function Quiz2({ navigation }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
+  const [adLoaded, setAdLoaded] = useState(false);
 
   const questions = [
     {
@@ -78,6 +85,18 @@ export default function Quiz2({navigation}) {
     },
   ];
 
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+      setAdLoaded(true);
+    });
+
+    interstitial.load();
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const currentQuestion = questions[currentQuestionIndex];
 
   const handleOptionPress = option => {
@@ -90,9 +109,14 @@ export default function Quiz2({navigation}) {
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setSelectedOption(null);
-      }, 1000); // Delay to show the selected answer before moving to the next question
+      }, 1000);
     } else {
       setIsQuizFinished(true);
+
+      // Show the interstitial ad if loaded
+      if (adLoaded) {
+        interstitial.show();
+      }
     }
   };
 
@@ -101,6 +125,7 @@ export default function Quiz2({navigation}) {
     setSelectedOption(null);
     setScore(0);
     setIsQuizFinished(false);
+    interstitial.load(); // Reload the ad for the next quiz attempt
   };
 
   return (

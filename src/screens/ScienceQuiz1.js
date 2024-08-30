@@ -1,11 +1,24 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Button} from 'react-native';
+import {
+  InterstitialAd,
+  AdEventType,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+
+const adUnitId = __DEV__
+  ? TestIds.INTERSTITIAL
+  : 'ca-app-pub-1948175280014202~2536411532';
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  keywords: ['fashion', 'clothing'],
+});
 
 export default function Quiz2({navigation}) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
+  const [adLoaded, setAdLoaded] = useState(false);
 
   const questions = [
     {
@@ -30,12 +43,22 @@ export default function Quiz2({navigation}) {
     },
     {
       question: 'What is the process by which plants make their food?',
-      options: ['Photosynthesis', 'Respiration', 'Transpiration', 'Fermentation'],
+      options: [
+        'Photosynthesis',
+        'Respiration',
+        'Transpiration',
+        'Fermentation',
+      ],
       correctAnswer: 'Photosynthesis',
     },
     {
       question: 'Who is known as the father of modern physics?',
-      options: ['Isaac Newton', 'Albert Einstein', 'Galileo Galilei', 'Niels Bohr'],
+      options: [
+        'Isaac Newton',
+        'Albert Einstein',
+        'Galileo Galilei',
+        'Niels Bohr',
+      ],
       correctAnswer: 'Albert Einstein',
     },
     {
@@ -49,17 +72,37 @@ export default function Quiz2({navigation}) {
       correctAnswer: 'Hydrogen',
     },
     {
-      question: 'Which organ in the human body is primarily responsible for pumping blood?',
+      question:
+        'Which organ in the human body is primarily responsible for pumping blood?',
       options: ['Liver', 'Lungs', 'Heart', 'Kidneys'],
       correctAnswer: 'Heart',
     },
     {
       question: 'What is the speed of light in a vacuum?',
-      options: ['300,000 km/s', '150,000 km/s', '100,000 km/s', '1,000,000 km/s'],
+      options: [
+        '300,000 km/s',
+        '150,000 km/s',
+        '100,000 km/s',
+        '1,000,000 km/s',
+      ],
       correctAnswer: '300,000 km/s',
     },
   ];
-  
+
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        setAdLoaded(true);
+      },
+    );
+
+    interstitial.load();
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -73,9 +116,14 @@ export default function Quiz2({navigation}) {
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setSelectedOption(null);
-      }, 1000); // Delay to show the selected answer before moving to the next question
+      }, 1000);
     } else {
       setIsQuizFinished(true);
+
+      // Show the interstitial ad if loaded
+      if (adLoaded) {
+        interstitial.show();
+      }
     }
   };
 
@@ -84,6 +132,7 @@ export default function Quiz2({navigation}) {
     setSelectedOption(null);
     setScore(0);
     setIsQuizFinished(false);
+    interstitial.load(); // Reload the ad for the next quiz attempt
   };
 
   return (

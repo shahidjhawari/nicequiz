@@ -20,6 +20,7 @@ export default function Quiz2({navigation}) {
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [adLoaded, setAdLoaded] = useState(false);
 
+  
   const questions = [
     {
       question: 'Who is known as the "Father of Modern Physics"?',
